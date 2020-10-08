@@ -1,7 +1,7 @@
 {
   "name": "ReuniometroWPA",
   "short_name": "ReuniometroWPA",
-  "start_url": "/reuniometro/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#03173d",

@@ -9,26 +9,33 @@ Welcome to the Reuniometro (The meeting metter).
         <div class="col h1 bg-secondary text-right text-white border rounded pr-2">@meeting.Cost.ToString("C")</div>
     </div>
     <div class="row">
-        <div class="col"><button class="btn oi oi-media-stop" @onclick="meeting.Stop" /></div>
-        <div class="col"><button class="btn oi oi-media-play" @onclick="meeting.StartMeeting" /></div>
-        <div class="col"><button class="btn oi oi-media-pause" @onclick="meeting.Pause" /></div>
-        <div class="col">@meeting.TotalCostPerHour.ToString("C")/Hour</div>
+        <div class="w-auto col"><button class="btn oi oi-media-stop" @onclick="meeting.Stop" /></div>
+        <div class="w-auto col"><button class="btn oi oi-media-play" @onclick="meeting.StartMeeting" /></div>
+        <div class="w-auto col"><button class="btn oi oi-media-pause" @onclick="meeting.Pause" /></div>
+        <div class="w-auto col">@meeting.TotalCostPerHour.ToString("C")/Hour</div>
     </div>
+
+
+    <div class="row">
+        <div class="w-25 col">Name/Role</div>
+        <div class="w-25 col">Number</div>
+        <div class="w-25 col">Cost/Hour</div>
+        <div class="w-25 col"></div>
+    </div>
+    @{ var odd = true;} 
+    @foreach (var attendee in meeting.Attendees)
+    {
+        <form action="javascript:void(0);">
+            <div class="form-row @(odd ? "row-odd":"")">
+                <div class="w-25 col-auto re"><input type="text" class="form-control mw-100" data-toggle="tooltip" data-placement="top" title="Name/Rol" @bind="@attendee.Name" @bind:event="oninput" placeholder="Name/Role" /></div>
+                <div class="w-25 col-auto"><input type="Number" min="1" step="1" class="form-control mw-100" data-toggle="tooltip" data-placement="top" title="Number of Attendees" placeholder="Number" @bind="@attendee.Number" @bind:event="oninput" /></div>
+                <div class="w-25 col-auto"><input type="number" class="form-control mw-100" placeholder="Cost/Hour" data-toggle="tooltip" data-placement="top" title="Cost per hour" @bind="@attendee.CostPerHour" @bind:event="oninput" /></div>
+                <div class="w-25 col-auto"><button class="btn btn-sm oi oi-plus" @onclick="meeting.AddAtendee" /> <button class="btn btn-sm oi oi-delete" aria-hidden="true" @onclick="@(e => meeting.RemoveAtendee(attendee))" /></div>
+            </div>
+        </form>
+        odd = !odd;
+    }
 </div>
-
-
-@foreach (var attendee in meeting.Attendees)
-{ 
-    <form action="javascript:void(0);">
-        <div class="form-row">
-            <div class="col-auto"><input type="text" class="form-control " data-toggle="tooltip" data-placement="top" title="Name/Rol" @bind="@attendee.Name" @bind:event="oninput" placeholder="Name/Role" /></div>
-            <div class="col-auto"><input type="Number" min="1" step="1" class="form-control" data-toggle="tooltip" data-placement="top" title="Number of Attendees" placeholder="Number" @bind="@attendee.Number" @bind:event="oninput" /></div>
-            <div class="col-auto"><input type="number" class="form-control" placeholder="Cost/Hour" data-toggle="tooltip" data-placement="top" title="Cost per hour" @bind="@attendee.CostPerHour" @bind:event="oninput" /></div>
-            <div class="col-auto">@attendee.TotalCost.ToString("C") <button class="btn btn-sm oi oi-plus" @onclick="meeting.AddAtendee"/> <button class="btn btn-sm oi oi-delete" aria-hidden="true" @onclick="@(e => meeting.RemoveAtendee(attendee))" /></div>
-        </div>
-    </form>
-}
-
 
 
 @code{
