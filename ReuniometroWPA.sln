@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReuniometroWPA", "ReuniometroWPA\ReuniometroWPA.csproj", "{A495626B-E823-477A-BFF7-D5FC550A9432}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReuniometroTest", "ReuniometroTest\ReuniometroTest.csproj", "{EA27D398-6673-497A-9ABD-E2C5CE38C866}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A495626B-E823-477A-BFF7-D5FC550A9432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A495626B-E823-477A-BFF7-D5FC550A9432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A495626B-E823-477A-BFF7-D5FC550A9432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A495626B-E823-477A-BFF7-D5FC550A9432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA27D398-6673-497A-9ABD-E2C5CE38C866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA27D398-6673-497A-9ABD-E2C5CE38C866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA27D398-6673-497A-9ABD-E2C5CE38C866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA27D398-6673-497A-9ABD-E2C5CE38C866}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A58561C-31D7-48D2-81FB-682E61AC27A7}
+	EndGlobalSection
+EndGlobal

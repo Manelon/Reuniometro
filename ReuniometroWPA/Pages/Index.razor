@@ -1,0 +1,61 @@
+﻿@page "/"
+@using ReuniometroWPA.Model;
+
+<h1>Reuniometro</h1>
+
+Welcome to the Reuniometro (The meeting metter).
+<div class="container border rounded">
+    <div class="row">
+        <div class="col h1 bg-secondary text-right text-white border rounded pr-2">@meeting.Cost.ToString("C")</div>
+    </div>
+    <div class="row">
+        <div class="col"><button class="btn oi oi-media-stop" @onclick="meeting.Stop" /></div>
+        <div class="col"><button class="btn oi oi-media-play" @onclick="meeting.StartMeeting" /></div>
+        <div class="col"><button class="btn oi oi-media-pause" @onclick="meeting.Pause" /></div>
+        <div class="col">@meeting.TotalCostPerHour.ToString("C")/Hour</div>
+    </div>
+</div>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th><span class="oi oi-people" aria-hidden="true"></span></th>
+            <th>Name/Role</th>
+            <th>Number</th>
+            <th>Cost per Hour</th>
+            <th><button class="btn btn-sm oi oi-plus" @onclick="meeting.AddAtendee"></button></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attendee in meeting.Attendees)
+        {
+            <tr>
+                <td><button class="btn btn-sm oi oi-delete" aria-hidden="true" @onclick="@(e => meeting.RemoveAtendee(attendee))"></button></td>
+                <td><input @bind="@attendee.Name" @bind:event="oninput" /></td>
+                <td><input type="Number" min="1" step="1" @bind="@attendee.Number" @bind:event="oninput" /></td>
+                <td><input @bind="@attendee.CostPerHour" @bind:event="oninput" /></td>
+                <td>@attendee.TotalCost.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@code{
+    private Meeting meeting = new Meeting();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        meeting.OnCostChanged += onCostChanged;
+    }
+
+
+    private void onCostChanged()
+    {
+        StateHasChanged();
+    }
+}

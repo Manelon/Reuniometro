@@ -1,0 +1,66 @@
+﻿@page "/reuniometrooriginal"
+@using ReuniometroWPA.Model;
+
+<div class="container">
+    <h1>Reuniometro</h1>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Coste/Hora</th>
+                    <th>Número</th>
+                    <th><button class="btn" @onclick="meeting.AddAtendee">+</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var attendee in meeting.Attendees)
+                {
+                    <tr>
+                        <td><input required placeholder="Nombre" class="form-control" @bind="@attendee.Name" @bind:event="oninput" /> </td>
+                        <td><input required placeholder="Coste/Hora" class="form-control" type="number" min="0.5" step="0.5" @bind="@attendee.CostPerHour" @bind:event="oninput" /></td>
+                        <td><input requierd placeholder="Número de asistentes" class="form-control" type="number" min="1" @bind="@attendee.Number" @bind:event="oninput" /></td>
+                        <td><button class="btn" @onclick="@(e => meeting.RemoveAtendee(attendee))">-</button></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td class="text-info"><strong>@meeting.TotalCostPerHour.ToString("C")/Hora</strong></td>
+                    <td class="text-info"><strong>@meeting.NumberAttendees</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div id="cronometro" class="row" style="font-size: 10rem !important;">
+        <div id="costeAcumulado" class="col-md-12 text-center" style="font-weight:bold; width:100%; display:block;">@meeting.Cost.ToString("C")</div>
+    </div>
+    <div id="empezar" class="row">
+        <div class="col-md-4 btn-group btn-group-justified">
+                <button class="btn btn-lg btn-primary" @onclick="meeting.StartMeeting">Empezar</button>
+                <button class="btn btn-lg btn-secondary" @onclick="meeting.Pause">Pausa</button>
+                <button class="btn btn-lg btn-secondary" @onclick="meeting.Stop">Reset</button>
+        </div>
+    </div>
+</div>
+
+
+
+@code{
+    private Meeting meeting = new Meeting();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        meeting.OnCostChanged += onCostChanged;
+    }
+
+
+    private void onCostChanged()
+    {
+        StateHasChanged();
+    }
+}
